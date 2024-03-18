@@ -8,6 +8,7 @@
     "build:ui": "rm -rf dist && cd ../frontend/ && npm run build && cp -r dist ../render-test",
     "deploy:full": "npm run build:ui && git add . && git commit -m uibuild && git push",
     "dev": "nodemon index.js",
+    "lint": "eslint .",
     "test": "echo \\\"Error: no test specified\\\" && exit 1"
   },
   "author": "",
@@ -19,6 +20,9 @@
     "mongoose": "^8.2.2"
   },
   "devDependencies": {
+    "@stylistic/eslint-plugin-js": "^1.7.0",
+    "eslint": "^8.57.0",
+    "eslint-config-google": "^0.14.0",
     "nodemon": "^3.1.0"
   }
 }

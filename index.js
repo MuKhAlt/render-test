@@ -1,5 +1,5 @@
 require('dotenv').config()
-const express = require('express');
+const express = require('express')
 const cors = require('cors')
 const Note = require('./models/note.js')
 
@@ -62,9 +62,9 @@ app.put('/api/notes/:id', (request, response, next) => {
   const { content, important }= request.body
 
   Note.findByIdAndUpdate(
-      request.params.id,
-      { content, important },
-      {new: true, runValidators: true, context: 'query'}
+    request.params.id,
+    { content, important },
+    { new: true, runValidators: true, context: 'query' }
   )
     .then(updatedNote => {
       response.json(updatedNote)
@@ -74,7 +74,7 @@ app.put('/api/notes/:id', (request, response, next) => {
 
 app.delete('/api/notes/:id', (request, response, next) => {
   Note.findByIdAndDelete(request.params.id)
-    .then(result => {
+    .then(() => {
       response.status(204).end()
     })
     .catch(error => next(error))
@@ -92,7 +92,7 @@ const errorHandler = (error, request, response, next) => {
   if (error.name === 'CastError') {
     return response.status(400).send('malformatted id')
   } else if (error.name === 'ValidationError') {
-    return response.status(400).json({error: error.message})
+    return response.status(400).json({ error: error.message })
   }
 
   next(error)
@@ -102,5 +102,5 @@ app.use(errorHandler)
 
 const PORT = process.env.PORT
 app.listen(PORT, () => {
-  console.log(`Server well and running on port:`, PORT)
+  console.log('Server well and running on port:', PORT)
 })
